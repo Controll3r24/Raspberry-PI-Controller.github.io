@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="it" data-title="title.index">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raspberry PI Controller</title>
+<meta name="description" content="Terminal, files, system monitor and browser for your Raspberry Pi in one Windows app.">
+<meta name="theme-color" content="#161514">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="24" y2="24">
+      <stop offset="0" stop-color="#f9c08f"/>
+      <stop offset="1" stop-color="#f7e3d0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="img/icon.png" alt=""><span>Raspberry PI Controller</span></a>
+    <nav class="links" aria-label="Principale">
+      <a href="#funzioni" data-i18n="nav.features">Funzioni</a>
+      <a href="#come" data-i18n="nav.how">Come si usa</a>
+      <a href="#requisiti" data-i18n="nav.req">Requisiti</a>
+      <a href="#faq" data-i18n="nav.faq">Domande</a>
+      <a href="guide.html" data-i18n="nav.guide">Guida</a>
+    </nav>
+    <div class="nav-r">
+      <div class="lang" role="group" aria-label="Language" data-active="it">
+        <i class="thumb"></i>
+        <button type="button" data-lang="it" aria-pressed="true">IT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn sm" href="download/Raspberry-PI-Controller.zip" download data-i18n="nav.download">Scarica</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <h1 class="in" style="--d:0ms" data-i18n="hero.title">Il tuo Raspberry Pi, in una sola finestra</h1>
+        <p class="lead in" style="--d:90ms" data-i18n="hero.sub">Terminale, file, monitor di sistema e browser in un'app per Windows. Ti colleghi con SSH e non installi nulla sul Raspberry.</p>
+        <div class="cta in" style="--d:180ms">
+          <a class="btn" href="download/Raspberry-PI-Controller.zip" download data-i18n="hero.cta1">Scarica il progetto</a>
+          <a class="btn ghost" href="guide.html" data-i18n="hero.cta2">Leggi la guida</a>
+        </div>
+        <p class="note in" style="--d:260ms" data-i18n="hero.note">Per Windows 10 e 11. Serve solo SSH attivo sul Raspberry.</p>
+      </div>
+
+      <div class="demo in" style="--d:340ms" aria-hidden="true">
+        <div class="demo-tb">
+          <img src="img/terminal.png" alt="">
+          <span data-i18n="demo.title">Terminale - pi@raspberrypi</span>
+          <span class="demo-c"><i></i><i></i><i></i></span>
+        </div>
+        <pre class="demo-term" id="term"></pre>
+        <div class="demo-stats">
+          <div><span data-i18n="demo.cpu">CPU</span><b id="s-cpu">23%</b></div>
+          <div><span data-i18n="demo.temp">Temperatura</span><b id="s-temp">47.2 °C</b></div>
+          <div><span data-i18n="demo.ram">RAM</span><b id="s-ram">31%</b></div>
+          <svg viewBox="0 0 300 60" preserveAspectRatio="none"><polyline id="spark" fill="none" stroke="url(#pg)" stroke-width="2" vector-effect="non-scaling-stroke" points=""/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec show" id="vetrina">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2 data-i18n="show.title">Guarda com'è fatta</h2>
+        <p data-i18n="show.sub">Schermate reali dell'app collegata a un Raspberry Pi.</p>
+      </div>
+      <div class="show-grid">
+        <div class="tabs" role="tablist">
+          <button class="tab on" role="tab" aria-selected="true" data-shot="monitor">
+            <b data-i18n="tab.monitor">Monitor di sistema</b>
+            <div class="tab-d"><p data-i18n="tab.monitor.d">CPU, temperatura, memoria e disco aggiornati ogni pochi secondi, con la cronologia del processore.</p></div>
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-shot="files">
+            <b data-i18n="tab.files">File Manager</b>
+            <div class="tab-d"><p data-i18n="tab.files.d">Sfoglia le cartelle del Raspberry, modifica i file di testo, carica e scarica senza scrivere comandi.</p></div>
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-shot="services">
+            <b data-i18n="tab.services">Servizi</b>
+            <div class="tab-d"><p data-i18n="tab.services.d">Avvia, ferma, riavvia o disattiva i servizi di sistema con un clic.</p></div>
+          </button>
+        </div>
+        <div class="frame">
+          <img class="shot on" data-shot="monitor" src="img/shot-monitor.jpg" alt="" width="1280" height="800">
+          <img class="shot" data-shot="files" src="img/shot-files.jpg" alt="" width="1280" height="800" loading="lazy">
+          <img class="shot" data-shot="services" src="img/shot-services.jpg" alt="" width="1280" height="800" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="funzioni">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2 data-i18n="feat.title">Nove strumenti, nessun comando da ricordare</h2>
+        <p data-i18n="feat.sub">Ogni app si apre con un clic dal desktop dell'applicazione.</p>
+      </div>
+      <div class="bento">
+        <article class="bc big c3">
+          <img class="bc-img" src="img/terminal.png" alt="" width="64" height="64">
+          <h3 data-i18n="f.terminal.t">Terminale</h3>
+          <p data-i18n="f.terminal.d">Una shell completa con colori e copia-incolla. Ne puoi aprire quante ne vuoi, anche affiancate.</p>
+        </article>
+        <article class="bc big c3">
+          <img class="bc-img" src="img/browser.png" alt="" width="64" height="64">
+          <h3 data-i18n="f.browser.t">Browser</h3>
+          <p data-i18n="f.browser.d">Un browser con le schede, per aprire la dashboard del Raspberry o cercare sul web senza cambiare finestra.</p>
+        </article>
+        <article class="bc c2">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <h3 data-i18n="f.files.t">File Manager</h3>
+          <p data-i18n="f.files.d">Cartelle, modifica, carica e scarica.</p>
+        </article>
+        <article class="bc c2">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
+          <h3 data-i18n="f.monitor.t">Monitor di sistema</h3>
+          <p data-i18n="f.monitor.d">CPU, temperatura, RAM e disco in tempo reale.</p>
+        </article>
+        <article class="bc c2">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+          <h3 data-i18n="f.proc.t">Processi</h3>
+          <p data-i18n="f.proc.d">Vedi cosa consuma di più e chiudi i processi bloccati.</p>
+        </article>
+        <article class="bc c2">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span>
+          <h3 data-i18n="f.serv.t">Servizi</h3>
+          <p data-i18n="f.serv.d">Gestisci i servizi di sistema.</p>
+        </article>
+        <article class="bc c2">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M12 20h.01"/></svg></span>
+          <h3 data-i18n="f.net.t">Rete</h3>
+          <p data-i18n="f.net.d">Interfacce, Wi-Fi, gateway e ping. Il Wi-Fi è sempre visibile in basso a destra.</p>
+        </article>
+        <article class="bc c2">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span>
+          <h3 data-i18n="f.gpio.t">GPIO</h3>
+          <p data-i18n="f.gpio.d">Lo stato dei pin, aggiornabile al volo.</p>
+        </article>
+        <article class="bc wide c6">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6"/></svg></span>
+          <div>
+            <h3 data-i18n="f.set.t">Impostazioni e alimentazione</h3>
+            <p data-i18n="f.set.d">Cambia sfondo e colori, leggi le informazioni del sistema, riavvia o spegni il Raspberry.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="come">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2 data-i18n="how.title">Pronto in tre passi</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">1</span>
+          <h3 data-i18n="how.s1.t">Attiva SSH sul Raspberry</h3>
+          <p data-i18n="how.s1.d">Si fa dal menu di configurazione di Raspberry Pi OS, in Interface Options.</p>
+          <div class="code sm"><pre><code>sudo raspi-config</code></pre></div>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <h3 data-i18n="how.s2.t">Crea l'app sul tuo PC</h3>
+          <p data-i18n="how.s2.d">Estrai il progetto e fai doppio clic su crea-app.bat. Alla prima volta serve Node.js.</p>
+          <div class="code sm"><pre><code>crea-app.bat</code></pre></div>
+        </li>
+        <li>
+          <span class="n">3</span>
+          <h3 data-i18n="how.s3.t">Collegati</h3>
+          <p data-i18n="how.s3.d">Scrivi indirizzo, username e password del Raspberry. Poi clicca un'icona per aprire un'app.</p>
+          <div class="code sm"><pre><code>pi@raspberrypi.local</code></pre></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="requisiti">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2 data-i18n="req.title">Cosa ti serve</h2>
+      </div>
+      <div class="req">
+        <div>
+          <h3 data-i18n="req.pc.t">Sul computer</h3>
+          <ul class="checks">
+            <li data-i18n="req.pc.1">Windows 10 o 11</li>
+            <li data-i18n="req.pc.2">Node.js (versione LTS), solo per creare l'app</li>
+            <li data-i18n="req.pc.3">Internet la prima volta, per scaricare le dipendenze</li>
+            <li data-i18n="req.pc.4">Circa 500 MB liberi durante la creazione</li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="req.pi.t">Sul Raspberry Pi</h3>
+          <ul class="checks">
+            <li data-i18n="req.pi.1">Raspberry Pi OS, o un altro Linux con systemd</li>
+            <li data-i18n="req.pi.2">SSH attivo</li>
+            <li data-i18n="req.pi.3">Raspberry e computer sulla stessa rete</li>
+            <li data-i18n="req.pi.4">Un utente con permessi sudo, per servizi, processi e spegnimento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec safe">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2 data-i18n="safe.title">I tuoi dati restano tuoi</h2>
+      </div>
+      <div class="safe-grid">
+        <div>
+          <h3 data-i18n="safe.1.t">Collegamento diretto</h3>
+          <p data-i18n="safe.1.d">L'app parla con il Raspberry tramite SSH. Non passa da nessun server esterno.</p>
+        </div>
+        <div>
+          <h3 data-i18n="safe.2.t">Password non salvata</h3>
+          <p data-i18n="safe.2.d">Se vuoi, l'app ricorda indirizzo e username. La password resta in memoria solo finché sei collegato.</p>
+        </div>
+        <div>
+          <h3 data-i18n="safe.3.t">Chiavi SSH</h3>
+          <p data-i18n="safe.3.d">Puoi entrare con una chiave privata invece che con la password.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap narrow">
+      <div class="sec-h">
+        <h2 data-i18n="faq.title">Domande frequenti</h2>
+      </div>
+      <div class="faq">
+        <details><summary data-i18n="faq.q1">Devo installare qualcosa sul Raspberry?</summary><p data-i18n="faq.a1">No. Basta che SSH sia attivo.</p></details>
+        <details><summary data-i18n="faq.q2">Funziona anche fuori casa?</summary><p data-i18n="faq.a2">Sì, se il Raspberry è raggiungibile dal tuo computer, per esempio con una VPN come Tailscale o WireGuard. L'app non apre porte da sola.</p></details>
+        <details><summary data-i18n="faq.q3">Posso usarla su Mac o Linux?</summary><p data-i18n="faq.a3">Il file crea-app.bat è per Windows. Il progetto è fatto con Electron, quindi con npm start si può avviare anche altrove, ma non è stato provato.</p></details>
+        <details><summary data-i18n="faq.q4">Perché non vedo la temperatura o il Wi-Fi?</summary><p data-i18n="faq.a4">Alcuni dati dipendono dal modello e dal sistema. Con il collegamento via cavo, il Wi-Fi risulta non connesso.</p></details>
+        <details><summary data-i18n="faq.q5">Come aggiorno l'app?</summary><p data-i18n="faq.a5">Scarica la nuova versione del progetto e lancia di nuovo crea-app.bat: l'installazione sostituisce la precedente.</p></details>
+        <details><summary data-i18n="faq.q6">L'app è lenta ad aprirsi, cosa faccio?</summary><p data-i18n="faq.a6">Usa la versione installata da crea-app.bat. Si avvia molto più in fretta della versione portatile, che ogni volta si decomprime da capo.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cta-sec">
+    <div class="wrap">
+      <div class="cta-box">
+        <img src="img/icon.png" alt="" width="84" height="84">
+        <div>
+          <h2 data-i18n="cta.title">Pronto a provarla?</h2>
+          <p data-i18n="cta.sub">Scarica il progetto, esegui crea-app.bat e collegati al tuo Raspberry.</p>
+        </div>
+        <a class="btn" href="download/Raspberry-PI-Controller.zip" download data-i18n="cta.btn">Scarica il progetto</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span data-i18n="foot.author">Autore: Controll3r24</span>
+    <nav><a href="guide.html" data-i18n="nav.guide">Guida</a><a href="#top" data-i18n="nav.home">Home</a></nav>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it" data-title="title.guide">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guida - Raspberry PI Controller</title>
+<meta name="theme-color" content="#161514">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-guide">
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="img/icon.png" alt=""><span>Raspberry PI Controller</span></a>
+    <nav class="links" aria-label="Principale">
+      <a href="index.html#funzioni" data-i18n="nav.features">Funzioni</a>
+      <a href="index.html#come" data-i18n="nav.how">Come si usa</a>
+      <a href="index.html#requisiti" data-i18n="nav.req">Requisiti</a>
+      <a href="index.html#faq" data-i18n="nav.faq">Domande</a>
+      <a href="guide.html" class="cur" data-i18n="nav.guide">Guida</a>
+    </nav>
+    <div class="nav-r">
+      <div class="lang" role="group" aria-label="Language" data-active="it">
+        <i class="thumb"></i>
+        <button type="button" data-lang="it" aria-pressed="true">IT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn sm" href="download/Raspberry-PI-Controller.zip" download data-i18n="nav.download">Scarica</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap guide">
+  <aside class="toc">
+    <p class="toc-h" data-i18n="g.toc">In questa pagina</p>
+    <nav>
+      <a href="#req" data-i18n="g.t.req">Requisiti</a>
+      <a href="#pi" data-i18n="g.t.pi">Prepara il Raspberry</a>
+      <a href="#build" data-i18n="g.t.build">Crea l'app</a>
+      <a href="#first" data-i18n="g.t.first">Primo collegamento</a>
+      <a href="#apps" data-i18n="g.t.apps">Le app</a>
+      <a href="#key" data-i18n="g.t.key">Accesso con chiave SSH</a>
+      <a href="#fix" data-i18n="g.t.fix">Problemi comuni</a>
+    </nav>
+  </aside>
+
+  <article class="doc">
+    <header class="doc-h">
+      <h1 data-i18n="g.title">Guida all'installazione</h1>
+      <p class="lead" data-i18n="g.lead">Dal download al primo collegamento. Segui i passi in ordine.</p>
+    </header>
+
+    <section id="req">
+      <h2 data-i18n="g.t.req">Requisiti</h2>
+      <p data-i18n="g.req.p">Controlla di avere tutto prima di cominciare.</p>
+      <div class="req">
+        <div>
+          <h3 data-i18n="req.pc.t">Sul computer</h3>
+          <ul class="checks">
+            <li data-i18n="req.pc.1">Windows 10 o 11</li>
+            <li data-i18n="req.pc.2">Node.js (versione LTS), solo per creare l'app</li>
+            <li data-i18n="req.pc.3">Internet la prima volta, per scaricare le dipendenze</li>
+            <li data-i18n="req.pc.4">Circa 500 MB liberi durante la creazione</li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="req.pi.t">Sul Raspberry Pi</h3>
+          <ul class="checks">
+            <li data-i18n="req.pi.1">Raspberry Pi OS, o un altro Linux con systemd</li>
+            <li data-i18n="req.pi.2">SSH attivo</li>
+            <li data-i18n="req.pi.3">Raspberry e computer sulla stessa rete</li>
+            <li data-i18n="req.pi.4">Un utente con permessi sudo, per servizi, processi e spegnimento</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="pi">
+      <h2 data-i18n="g.t.pi">Prepara il Raspberry</h2>
+      <p data-i18n="g.pi.p1">Attiva SSH. Dal Raspberry (con tastiera e schermo, o da un altro accesso) scrivi:</p>
+      <div class="code"><pre><code>sudo raspi-config</code></pre><button class="copy" type="button">Copia</button></div>
+      <p data-i18n="g.pi.p2">Vai su Interface Options, poi SSH, poi Sì. In alternativa, con un solo comando:</p>
+      <div class="code"><pre><code>sudo systemctl enable --now ssh</code></pre><button class="copy" type="button">Copia</button></div>
+      <p data-i18n="g.pi.p3">Trova l'indirizzo del Raspberry:</p>
+      <div class="code"><pre><code>hostname -I</code></pre><button class="copy" type="button">Copia</button></div>
+      <p class="muted" data-i18n="g.pi.p4">Al posto dell'indirizzo, di solito funziona anche il nome raspberrypi.local.</p>
+    </section>
+
+    <section id="build">
+      <h2 data-i18n="g.t.build">Crea l'app</h2>
+      <ol class="list">
+        <li data-i18n="g.b.1">Estrai il file ZIP del progetto in una cartella.</li>
+        <li data-i18n="g.b.2">Se non lo hai, installa Node.js (versione LTS) da nodejs.org.</li>
+        <li data-i18n="g.b.3">Fai doppio clic su crea-app.bat e conferma la richiesta di amministratore.</li>
+        <li data-i18n="g.b.4">Aspetta la fine: l'installazione parte da sola e crea il collegamento sul desktop.</li>
+      </ol>
+      <p class="muted" data-i18n="g.b.note">La prima volta vengono scaricate le dipendenze, quindi serve internet.</p>
+      <p data-i18n="g.b.dev">Per provare l'app senza installarla, apri un terminale nella cartella del progetto e scrivi:</p>
+      <div class="code"><pre><code>npm install
+npm start</code></pre><button class="copy" type="button">Copia</button></div>
+    </section>
+
+    <section id="first">
+      <h2 data-i18n="g.t.first">Primo collegamento</h2>
+      <p data-i18n="g.f.p1">Apri Raspberry PI Controller e compila i campi:</p>
+      <ul class="list">
+        <li data-i18n="g.f.1">Indirizzo: l'IP o il nome del Raspberry</li>
+        <li data-i18n="g.f.2">Username: di solito pi, oppure quello scelto in installazione</li>
+        <li data-i18n="g.f.3">Password: quella dell'utente</li>
+      </ul>
+      <p data-i18n="g.f.p2">Premi Connetti. Se qualcosa non va, l'app ti dice cosa controllare. Porta e chiave privata sono in Opzioni avanzate.</p>
+      <figure class="shot-f"><img src="img/shot-login.jpg" alt="" width="1280" height="800" loading="lazy"></figure>
+    </section>
+
+    <section id="apps">
+      <h2 data-i18n="g.t.apps">Le app</h2>
+      <p data-i18n="g.a.p">Cosa fa ogni app e cosa richiede sul Raspberry.</p>
+      <dl class="dl">
+        <div><dt data-i18n="f.terminal.t">Terminale</dt><dd data-i18n="g.a.terminal">Una shell completa. Non richiede nulla di speciale.</dd></div>
+        <div><dt data-i18n="f.files.t">File Manager</dt><dd data-i18n="g.a.files">Sfoglia, modifica, carica e scarica file tramite SFTP.</dd></div>
+        <div><dt data-i18n="f.browser.t">Browser</dt><dd data-i18n="g.a.browser">Browser a schede, separato dal tuo browser di Windows.</dd></div>
+        <div><dt data-i18n="f.monitor.t">Monitor di sistema</dt><dd data-i18n="g.a.monitor">Legge i dati da /proc e dal sensore termico del sistema.</dd></div>
+        <div><dt data-i18n="f.proc.t">Processi</dt><dd data-i18n="g.a.proc">Elenco ordinato per CPU. Per terminare un processo serve sudo.</dd></div>
+        <div><dt data-i18n="f.serv.t">Servizi</dt><dd data-i18n="g.a.serv">Usa systemctl. Per avviare o fermare servizi serve sudo.</dd></div>
+        <div><dt data-i18n="f.net.t">Rete</dt><dd data-i18n="g.a.net">Usa ip e iwgetid. Il Wi-Fi in basso a destra si aggiorna da solo.</dd></div>
+        <div><dt data-i18n="f.gpio.t">GPIO</dt><dd data-i18n="g.a.gpio">Usa pinctrl o raspi-gpio, a seconda del sistema.</dd></div>
+        <div><dt data-i18n="f.set.t">Impostazioni e alimentazione</dt><dd data-i18n="g.a.set">Aspetto, informazioni di sistema, riavvio e spegnimento (con sudo).</dd></div>
+      </dl>
+    </section>
+
+    <section id="key">
+      <h2 data-i18n="g.t.key">Accesso con chiave SSH</h2>
+      <p data-i18n="g.k.p1">Sul tuo computer crea una chiave, da PowerShell:</p>
+      <div class="code"><pre><code>ssh-keygen -t ed25519</code></pre><button class="copy" type="button">Copia</button></div>
+      <p data-i18n="g.k.p2">Copia la chiave pubblica sul Raspberry:</p>
+      <div class="code"><pre><code>type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh pi@raspberrypi.local "mkdir -p ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys"</code></pre><button class="copy" type="button">Copia</button></div>
+      <p data-i18n="g.k.p3">Nel login apri Opzioni avanzate e scegli il file id_ed25519 in Chiave privata.</p>
+    </section>
+
+    <section id="fix">
+      <h2 data-i18n="g.t.fix">Problemi comuni</h2>
+      <div class="faq">
+        <details><summary data-i18n="g.x.1.t">Connessione rifiutata</summary><p data-i18n="g.x.1.d">SSH non è attivo sul Raspberry. Torna a Prepara il Raspberry.</p></details>
+        <details><summary data-i18n="g.x.2.t">Il Raspberry non risponde</summary><p data-i18n="g.x.2.d">Controlla che sia acceso e sulla stessa rete. Prova con l'indirizzo IP invece del nome.</p></details>
+        <details><summary data-i18n="g.x.3.t">Username o password non corretti</summary><p data-i18n="g.x.3.d">Controlla maiuscole e minuscole. Sulle versioni recenti di Raspberry Pi OS l'utente pi non esiste più: usa quello creato in installazione.</p></details>
+        <details><summary data-i18n="g.x.4.t">crea-app.bat dice che Node.js non c'è</summary><p data-i18n="g.x.4.d">Installa Node.js, poi chiudi e riapri il file.</p></details>
+        <details><summary data-i18n="g.x.5.t">Errore durante la creazione dell'app</summary><p data-i18n="g.x.5.d">Il file va eseguito come amministratore e lo chiede da solo. Controlla anche l'antivirus e la connessione a internet.</p></details>
+        <details><summary data-i18n="g.x.6.t">Servizi, processi o spegnimento non funzionano</summary><p data-i18n="g.x.6.d">L'utente deve poter usare sudo. Per i comandi sudo l'app usa la password inserita al login.</p></details>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span data-i18n="foot.author">Autore: Controll3r24</span>
+    <nav><a href="index.html" data-i18n="nav.home">Home</a><a href="#top">↑</a></nav>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
